@@ -1,4 +1,5 @@
 from random import randint
+from time import sleep
 from funcoes import enfeite
 
 arquivo = open('historico.txt', 'r', encoding='utf-8')
@@ -30,7 +31,11 @@ enfeite('13','Lotofácil da independência')
 print('-'*60)
 enfeite('14','Sair')
 
-escolha = int(input('Digite sua opção: '))
+escolha = int(input('Digite o número da sua opção,: '))
+if escolha == 14:
+    print('Encerrando o programa...')
+    sleep(1)
+    exit()
 usuario = 0
 
 for n in range(1, usuario + 1):
