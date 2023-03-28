@@ -15,7 +15,7 @@ print('='*60)
 print('')
 print('Confira a seguir os tipos de loteria:')
 
-enfeite('1','Mega Sena')
+enfeite('1','Mega-Sena')
 enfeite('2','Lotofácil')
 enfeite('3','Dupla Sena')
 enfeite('4','Quina')
@@ -32,16 +32,18 @@ print('-'*60)
 enfeite('14','Sair')
 
 escolha = int(input('Digite o número da sua opção,: '))
+maxnum = 0
+numsorteados = 0
+
 if escolha == 14:
     print('Encerrando o programa...')
     sleep(1)
     exit()
-usuario = 0
 
-for n in range(1, usuario + 1):
-    gerador = randint(1, 61)
+for n in range(1, numsorteados + 1):
+    gerador = randint(1, maxnum + 1)
     while gerador in armazenamento:
-        gerador = randint(1, 61)
+        gerador = randint(1, maxnum + 1)
     armazenamento.append(gerador)
     arquivo = open('historico.txt', 'a', encoding='utf-8')
     arquivo.write((str(gerador) + ' '))
