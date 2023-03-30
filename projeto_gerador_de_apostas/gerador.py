@@ -7,46 +7,31 @@ conteudo = arquivo.read()
 print(conteudo)
 historico = list()
 armazenamento = list()
+aposta = list()
+numeros = list()
 
 print('='*60)
 print('Bem vindo a loteria! '.center(60))
 print('='*60)
 
 print('')
-print('Confira a seguir os tipos de loteria:')
+print('Dobre o seu dinheiro se acertar os números que serão gerados pela maquina!')
 
-enfeite('1','Mega-Sena')
-enfeite('2','Lotofácil')
-enfeite('3','Dupla Sena')
-enfeite('4','Quina')
-enfeite('5','Super sete')
-enfeite('6','Timemania')
-enfeite('7','Lotomania')
-enfeite('8','Dia de sorte')
-enfeite('9','Federal')
-enfeite('10','Mega sena da virada')
-enfeite('11','Quina de São João')
-enfeite('12','Dupla sena de páscoa')
-enfeite('13','Lotofácil da independência')
-print('-'*60)
-enfeite('14','Sair')
+aposta.append(float(input('Digite o valor da sua aposta: R$')))
+for n in range(1, 7):
+    numeros.append(int(input(f'Digite o {n}° número, de 01 a 60 (sem repetir): ')))
 
-escolha = int(input('Digite o número da sua opção,: '))
-maxnum = 0
-numsorteados = 0
-
-if escolha == 14:
-    print('Encerrando o programa...')
-    sleep(1)
-    exit()
-
-for n in range(1, numsorteados + 1):
-    gerador = randint(1, maxnum + 1)
+for n in range(1, 7):
+    gerador = randint(1, 60 + 1)
     while gerador in armazenamento:
-        gerador = randint(1, maxnum + 1)
+        gerador = randint(1, 60 + 1)
     armazenamento.append(gerador)
     arquivo = open('historico.txt', 'a', encoding='utf-8')
     arquivo.write((str(gerador) + ' '))
 arquivo.write('\n')
 arquivo.close()
-print(armazenamento)
+print(f'Os números gerados foram: {armazenamento} ')
+if numeros in armazenamento:
+    print('PARABÉNS! Você acertou.')
+else:
+    print('Você errou! Mais sorte na próxima vez.')
