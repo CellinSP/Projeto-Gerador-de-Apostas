@@ -1,6 +1,6 @@
 from random import randint
 from time import sleep
-from funcoes import enfeite
+from termcolor import colored
 
 arquivo = open('historico.txt', 'r', encoding='utf-8')
 conteudo = arquivo.read()
@@ -30,8 +30,14 @@ for n in range(1, 7):
     arquivo.write((str(gerador) + ' '))
 arquivo.write('\n')
 arquivo.close()
-print(f'Os números gerados foram: {armazenamento} ')
+print('Os números gerados foram: ', end='')
+for n in range(0, 6):
+    sleep(1)
+    if numeros in armazenamento:
+        print(colored(f'{armazenamento[n]:02d}', 'green'), end=' ')
+    else:
+        print(colored(f'{armazenamento[n]:02d}', 'red'), end=' ')
 if numeros in armazenamento:
-    print('PARABÉNS! Você acertou.')
+    print('\nPARABÉNS! Você acertou.')
 else:
-    print('Você errou! Mais sorte na próxima vez.')
+    print('\nVocê errou! Mais sorte na próxima vez.')
