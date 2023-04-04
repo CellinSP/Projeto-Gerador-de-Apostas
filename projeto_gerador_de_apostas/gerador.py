@@ -26,8 +26,7 @@ while True:
         print(conteudo, end='')
         print('-'*17)
     elif escolha == 3:
-        print('Encerrando o programa...')
-        sleep(1,5)
+        print('Programa encerrado.')
         exit()
 aposta.append(float(input('Digite o valor da sua aposta: R$')))
 for n in range(1, 7):
@@ -43,16 +42,18 @@ for n in range(1, 7):
 arquivo.write('\n')
 arquivo.close()
 print('Os números gerados foram: ', end='')
+acertos = 0
 for n in range(0, 6):
     sleep(1)
-    if numeros in armazenamento:
+    if armazenamento[n] in numeros:
+        acertos += 1
         print(colored(f'{armazenamento[n]:02d}', 'green'), end=' ')
     else:
         print(colored(f'{armazenamento[n]:02d}', 'red'), end=' ')
-if numeros in armazenamento:
-    print('\nPARABÉNS! Você acertou.')
+if acertos == 6:
+    print('\nPARABÉNS! Você acertou todos os números.')
 else:
-    print('\nVocê errou! Mais sorte na próxima vez.')
+    print(f'\nVocê acertou {acertos} número(s). Mais sorte na próxima vez.')
 while True:
     print('1-Histórico\n2-Limpar histórico\n3-Sair')
     escolha = int(input('Digite o número de uma opção para continuar: '))
@@ -65,6 +66,5 @@ while True:
             arquivo.write('')
             arquivo.close()
     elif escolha == 3:
-        print('Encerrando o programa...')
-        sleep(1,5)
+        print('Programa encerrado.')
         exit()
