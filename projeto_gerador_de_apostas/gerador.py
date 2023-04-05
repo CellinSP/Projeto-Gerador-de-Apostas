@@ -52,6 +52,7 @@ for n in range(0, 6):
         print(colored(f'{armazenamento[n]:02d}', 'red'), end=' ')
 if acertos == 6:
     print('\nPARABÉNS! Você acertou todos os números.')
+    print(f'Você ganhou R${aposta[0]*2}')
 else:
     print(f'\nVocê acertou {acertos} número(s). Mais sorte na próxima vez.')
 while True:
