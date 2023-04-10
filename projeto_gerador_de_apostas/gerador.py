@@ -28,7 +28,7 @@ while True:
     elif escolha == 3:
         print('Programa encerrado.')
         exit()
-aposta.append(float(input('Digite o valor da sua aposta: R$')))
+aposta.append(float(input('Digite o valor da sua aposta: R$').replace(',', '.').strip()))
 for n in range(1, 7):
     numeros.append(int(input(f'Digite o {n}° número, de 01 a 60 (sem repetir): ')))
 
