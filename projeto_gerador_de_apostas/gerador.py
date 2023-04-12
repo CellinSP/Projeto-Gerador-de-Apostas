@@ -22,6 +22,8 @@ while True:
         while True:
             print('1-Aposta\n2-Histórico\n3-Sair')
             escolha = int(input('Digite o número de uma opção para continuar: '))
+            if escolha < 1 or escolha > 3:
+                raise ValueError
             if escolha == 1:
                 break
             elif escolha == 2:
@@ -68,6 +70,8 @@ while True:
         while True:
             print('1-Histórico\n2-Limpar histórico\n3-Sair')
             escolha = int(input('Digite o número de uma opção para continuar: '))
+            if escolha < 1 or escolha > 3:
+                raise ValueError
             if escolha == 1:
                 print('-'*17)
                 print(conteudo, end='')
@@ -81,5 +85,13 @@ while True:
                 break
         if escolha == 3:
             break
-    except:
-        print(colored('Houve algum erro, verifique se digitou uma opção válida', 'red'))
+    except FileNotFoundError:
+        print(colored('ERRO! Arquivo "historico.txt" não encontrado. '
+                      'Certifique-se de que o arquivo existe '
+                      'e está na pasta correta.', 'red'))
+    except PermissionError:
+        print(colored('ERRO! O programa não tem permissão para acessar ou escrever no arquivo '
+                      '"historico.txt". Certifique-se de que o arquivo não está sendo usado '
+                      'por outro programa e que você tem permissão para acessa-lo. ', 'red'))
+    except ValueError:
+        print(colored('ERRO! Por favor digite um número válido', 'red'))
