@@ -31,17 +31,28 @@ while True:
                 print(conteudo, end='')
                 print('-'*17)
             elif escolha == 3:
-                print('Programa encerrado.')
-                break
+                confirmacao = input(colored('Tem certeza de que '
+                                    'gostaria de sair do programa? ', 'yellow')).lower().strip()[0]
+                if confirmacao != 's' and confirmacao != 'n':
+                    raise TypeError
+                elif confirmacao == 's':
+                    print('Encerrando o programa...')
+                    break
         if escolha == 3:
             break
-        aposta.append(float(input('Digite o valor da sua aposta: R$').replace(',', '.').strip()))
+        valor = float(input('Digite o valor da sua aposta: R$').replace(',', '.').strip())
+        if valor <= 0:
+            raise ValueError
+        aposta.append(valor)
         CONT = 1
         while len(numeros) != 6:
             verificacao = int(input(f'Digite o {CONT}° número, de 01 a 60 (sem repetir): '))
             if verificacao not in numeros:
-                numeros.append(verificacao)
-                CONT += 1
+                if verificacao > 0 and verificacao < 61:
+                    numeros.append(verificacao)
+                    CONT += 1
+                else:
+                    raise ValueError
             else:
                 print(colored('ERRO! Por favor, não repita o mesmo número.', 'red'))
         for n in range(1, 7):
@@ -50,7 +61,7 @@ while True:
                 gerador = randint(1, 60)
             armazenamento.append(gerador)
             arquivo = open('historico.txt', 'a', encoding='utf-8')
-            arquivo.write((str(gerador) + ' '))
+            arquivo.write(f"{gerador:02d} ")
         arquivo.write('\n')
         arquivo.close()
         print('Os números gerados foram: ', end='')
@@ -77,12 +88,23 @@ while True:
                 print(conteudo, end='')
                 print('-'*17)
             elif escolha == 2:
-                with open('historico.txt', 'w', encoding='utf-8') as arquivo:
-                    arquivo.write('')
-                    arquivo.close()
+                confirmacao = input(colored('Tem certeza de que '
+                                    'gostaria de limpar o histórico? ','yellow')).lower().strip()[0]
+                if confirmacao != 's' and confirmacao != 'n':
+                    raise TypeError
+                elif confirmacao == 's':
+                    print('Limpando o histórico...')
+                    with open('historico.txt', 'w', encoding='utf-8') as arquivo:
+                        arquivo.write('')
+                        arquivo.close()
             elif escolha == 3:
-                print('Programa encerrado.')
-                break
+                confirmacao = input(colored('Tem certeza de que '
+                                    'gostaria de sair do programa? ', 'yellow')).lower().strip()[0]
+                if confirmacao != 's' and confirmacao != 'n':
+                    raise TypeError
+                elif confirmacao == 's':
+                    print('Encerrando o programa...')
+                    break
         if escolha == 3:
             break
     except FileNotFoundError:
@@ -95,3 +117,5 @@ while True:
                       'por outro programa e que você tem permissão para acessa-lo. ', 'red'))
     except ValueError:
         print(colored('ERRO! Por favor digite um número válido', 'red'))
+    except TypeError:
+        print(colored('ERRO! Por favor digite "sim" ou "não"', 'red'))
